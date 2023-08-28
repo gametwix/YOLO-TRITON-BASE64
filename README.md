@@ -57,3 +57,10 @@ docker run -it --shm-size 8gb --gpus all --rm \
 triton tritonserver --model-repository /app/triton_repo
 ```
 
+## Тестирование
+
+Для тестирования были взяты фото из этого [датасета](https://www.kaggle.com/datasets/trungit/coco25k). Для каждого batchsize были взяты по 100 батчей с рандомными изображениями из датасета выше. Эти изображения были кодированы в base64, записаны в json и переданы в параметр `input-data` утилиты `perf_analyzer`. 
+
+![](readme_images/result_test.png)
+
+Подобный результат говорит о том, что узким местом в нашем ансамбле являются `python_backen` модели.

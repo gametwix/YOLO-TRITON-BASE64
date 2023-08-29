@@ -37,7 +37,19 @@ docker run -it --shm-size 8gb --gpus all --rm \
 
 ## Инференс модели
 
-Для решения задачи в Python Backend используются пакеты `numpy` и `cv2`. Поэтому необходимо собрать python окружение с помощью `conda-pack`. Также необходимы библиотека `libGL`, для этого соберем образ на базе базового `nvcr.io/nvidia/tritonserver:22.12-py3`
+Для решения задачи в Python Backend используются пакеты `numpy` и `cv2`. Поэтому необходимо собрать python окружение с помощью `conda-pack`. Для этого я использовал образ `continuumio/miniconda3`. 
+
+```
+docker run -it -v ./conda_req.txt:/condareq/conda_req.txt -v ./triton_python_env:/triton_env continuumio/miniconda3
+conda create -n env python=3.8 -y
+conda activate env
+pip install -r /condareq/conda_req.txt
+cd /triton_env
+conda install conda-pack -y
+conda-pack
+```
+
+Также необходимы библиотека `libGL`, для этого соберем образ на базе базового `nvcr.io/nvidia/tritonserver:22.12-py3`
 
 ```
 docker build -t triton .

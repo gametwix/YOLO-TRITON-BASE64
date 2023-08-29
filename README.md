@@ -11,6 +11,8 @@ docker run --rm --gpus all -it -v ./yolo_converter:/mnt -v ./triton_repo:/triton
 
 На выходе получаем сконвертированную модель и конфигурационный файл для Nvidia Triton.
 
+![](readme_images/navigator_sum.png)
+
 Triton Model Navigator выводит нас следующие параметры модели
 
 ```
